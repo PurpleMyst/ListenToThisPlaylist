@@ -27,8 +27,8 @@ class ErrorOnlyLogger:
         print(msg)
 
 
-def fetch_urls(reddit):
-    subreddit = reddit.subreddit("listentothis")
+def fetch_urls(reddit, subreddits):
+    subreddit = reddit.subreddit("+".join(subreddits))
     urls = []
 
     for post in subreddit.top("week"):
@@ -72,12 +72,15 @@ def play_url(ydl, url):
 
 
 def main():
+    with open("config.json") as config_file:
+        config = json.load(config_file)
+
     with open("app.json") as app_info_file:
         app_info = json.load(app_info_file)
 
     print("Connecting to Reddit and fetching URLs...")
     reddit = praw.Reddit(**app_info)
-    urls = fetch_urls(reddit)
+    urls = fetch_urls(reddit, config["subreddits"])
     random.shuffle(urls)
     print("Done fetching")
 
