@@ -22,5 +22,5 @@ like.
 }
 ```
 
-3. Run `pip3 install -r requirements.txt` to download the needed dependencies.
+3. Run `python3 -m pip install -r requirements.txt` to download the needed dependencies.
 4. Run `python3 app.py` whenever you want to listen to music!
